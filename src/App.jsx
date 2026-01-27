@@ -26,7 +26,8 @@ export default function App() {
     setLoading(true);
 
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/chat", {
+      const backendUrl = import.meta.env.VITE_BACKEND_URL || "https://savourabot-backend-1.onrender.com";
+      const res = await fetch(`${backendUrl}/api/chat`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
