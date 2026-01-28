@@ -26,7 +26,24 @@ export default function App() {
     setLoading(true);
 
     try {
-      const backendUrl = import.meta.env.VITE_BACKEND_URL || "https://savourabot-backend-1.onrender.com";
+      // const backendUrl = import.meta.env.VITE_BACKEND_URL || "https://savourabot-backend-1.onrender.com";
+      // const res = await fetch(`${backendUrl}/api/chat`, {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({ message: text }),
+      // });
+
+      // if (!res.ok) {
+      //   throw new Error("Erreur serveur");
+      // }
+      const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
+      if (!backendUrl) {
+        throw new Error("VITE_BACKEND_URL non définie");
+      }
+
       const res = await fetch(`${backendUrl}/api/chat`, {
         method: "POST",
         headers: {
@@ -38,6 +55,7 @@ export default function App() {
       if (!res.ok) {
         throw new Error("Erreur serveur");
       }
+
 
       const data = await res.json();
 
