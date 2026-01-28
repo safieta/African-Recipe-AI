@@ -41,8 +41,17 @@ export default function App() {
       const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
       if (!backendUrl) {
-        throw new Error("VITE_BACKEND_URL non définie");
+        setMessages((prev) => [
+          ...prev,
+          {
+            role: "assistant",
+            content: "⚠️ Configuration serveur manquante. Veuillez contacter l’administrateur.",
+          },
+        ]);
+        setLoading(false);
+        return;
       }
+
 
       const res = await fetch(`${backendUrl}/api/chat`, {
         method: "POST",
